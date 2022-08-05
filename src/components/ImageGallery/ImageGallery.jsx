@@ -1,22 +1,21 @@
+import PropTypes from 'prop-types';
 import { Component } from "react";
 import ImageGalleryItem from '../ImageGalleryItem';
-// import Button from "../Button";
-// import Loader from "../Loader";
+import { Gallery } from './ImageGallery.styled';
 
 export default class ImageGallery extends Component {
-    state = {
-        // images: [],
-        // page: 1, 
+    static propTypes = {
+        images: PropTypes.array,
+        onClick: PropTypes.func,
     }
 
-
     render() {
-        const { images } = this.props;
+        const { images, onClick } = this.props;
         return (
             <>                
-                {<ul className="gallery">
+                {<Gallery onClick={onClick} className="gallery"> 
                     {images.map(({ id, webformatURL, largeImageURL, tags }) => <ImageGalleryItem key={id} webformatURL={webformatURL} largeImageURL={largeImageURL} tags={tags}/>)}
-                </ul>}
+                </Gallery>}
             </>
         );
 };

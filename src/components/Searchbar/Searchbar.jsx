@@ -1,12 +1,21 @@
+import PropTypes from 'prop-types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Component } from "react";
+import { Header } from './Searchbar.styled';
+import { SearchForm } from './Searchbar.styled';
+import { SearchBtn } from './Searchbar.styled';
+import { ButtonLabel } from './Searchbar.styled';
+import { Input } from './Searchbar.styled';
 
 export default class Form extends Component {
     state = {
         inputValue: '',
     }
 
+    static propTypes = {
+        onSubmit: PropTypes.func,
+    }
 
     inputHandler = (e) => {
         this.setState({ inputValue: e.currentTarget.value });
@@ -26,13 +35,13 @@ export default class Form extends Component {
 
     render() {
         return (
-            <header className="searchbar">
-                <form className="form" onSubmit={this.onSubmit}>
-                    <button type="submit" className="button">
-                        <span className="button-label">Search</span>
-                    </button>
+            <Header>
+                <SearchForm onSubmit={this.onSubmit}>
+                    <SearchBtn type="submit" >
+                        <ButtonLabel>Search</ButtonLabel>
+                    </SearchBtn>
                     <ToastContainer />
-                    <input
+                    <Input
                         onChange={this.inputHandler}
                         type="text"
                         autoComplete="off"
@@ -40,8 +49,8 @@ export default class Form extends Component {
                         placeholder="Search images and photos"
                         value={this.state.inputValue}
                     />
-                </form>
-            </header>
+                </SearchForm>
+            </Header>
         );
     }
 }
